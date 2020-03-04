@@ -83,12 +83,3 @@ print('save data')
 #pickle.dump((layer1_tables,layer2_tables),open('data/dimension_'+str(K)+'_tables.pkl','wb'))
 pickle.dump((layer1_efranks,layer2_efranks),open('data/dimension_'+str(K)+'_tables.pkl','wb'))
 print('save completed')
-
-l1 = plt.scatter(efrank1,'blue')
-l2 = plt.scatter(efrank2,'red')
-
-plt.legend([l1,l2],['single-layer k=%s'%K,'2-layer d=%s k=%s'%(64,K)],loc='best')
-plt.title('Effective Ranks of Embedding Matrices Learned by 2 models, averaged ratio: %.4f'%(layer1_efranks.sum()/layer2_efranks.su,()))
-plt.xlabel('Sparse Feature Index')
-plt.xlabel('Effective Rank')
-plt.savefig('plots/(%s %s)rank_plot.pdf'%(64,K))
