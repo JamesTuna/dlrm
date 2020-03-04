@@ -80,7 +80,8 @@ for i in range(21):
     print('table %02d shape (%6d x %6d)\nEffective Rank: 1-layer model %.4f 2-layer model %.4f'%(i,n,k,efrank1,efrank2))
 
 print('save data')
-pickle.dump((layer1_tables,layer2_tables),open('data/dimension_'+str(K)+'_tables.pkl','wb'))
+#pickle.dump((layer1_tables,layer2_tables),open('data/dimension_'+str(K)+'_tables.pkl','wb'))
+pickle.dump((layer1_efranks,layer2_efranks),open('data/dimension_'+str(K)+'_tables.pkl','wb'))
 print('save completed')
 
 l1 = plt.scatter(efrank1,'blue')
