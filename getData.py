@@ -2,7 +2,8 @@
 import torch,argparse
 import numpy as np
 from scipy.stats import entropy
-import scipy,time
+import scipy,time,pickle
+import matplotlib.pyplot as plt
 
 '''This script extract 21 embedding matrices from
     1).dlrm_k.m
@@ -74,8 +75,18 @@ for i in range(21):
 
     efrank1 = fast_effective_rank(layer1_tables[i])
     efrank2 = fast_effective_rank(layer2_tables[i])
+    layer1_efranks[i] = efrank1
+    layer2_efranks[i] = efrank2
     print('table %02d shape (%6d x %6d)\nEffective Rank: 1-layer model %.4f 2-layer model %.4f'%(i,n,k,efrank1,efrank2))
-    #efrank1_1 = effective_rank(layer1_tables[i])
-    #efrank2_1 = effective_rank(layer2_tables[i])
-    #print('table %02d\t Rank: 1-layer model %.4f 2-layer model %.4f, using normal procedure'%(i,efrank1_1,efrank2_1))
 
+pickle.dump((layer1_tables,layer2_tables),open('data/dimension_'+str(K)+'_tables.pkl','wb'))
+
+l1 = plt.scatter(efrank1,'blue')
+l2 = plt.scatter(efrank2,'red')
+
+plt.legend([l1,l2],['single-layer k=%s'%K,'2-layer d=%s k=%s'%(64,K)],loc='best')
+plt.title('Effective Ranks of Embedding Matrices Learned by 2 models')
+plt.xlabel('Sparse Feature Index')
+plt.xlabel('Effective Rank')
+plt.savefig('plots/(%s %s)rank_plot.pdf'%(64,K))
+plt.show()
