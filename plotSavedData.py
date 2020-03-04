@@ -15,11 +15,11 @@ rank_16_avg = (rank_16[0].mean(),rank_16[1].mean())
 rank_32_avg = (rank_32[0].mean(),rank_32[1].mean())
 rank_64_avg = (rank_64[0].mean(),rank_64[1].mean())
 
-ratio_4 = rank_4[0]/rank_4[1]
-ratio_8 = rank_8[0]/rank_8[1]
-ratio_16 = rank_16[0]/rank_16[1]
-ratio_32 = rank_32[0]/rank_32[1]
-ratio_64 = rank_64[0]/rank_64[1]
+ratio_4 = rank_4[1]/rank_4[0]
+ratio_8 = rank_8[1]/rank_8[0]
+ratio_16 = rank_16[1]/rank_16[0]
+ratio_32 = rank_32[1]/rank_32[0]
+ratio_64 = rank_64[1]/rank_64[0]
 
 for i in range(5):
     efrank1,efrank2 = (rank_4,rank_8,rank_16,rank_32,rank_64)[i]
@@ -66,7 +66,7 @@ for i in range(5):
     l1 = plt.scatter(Xs,ratios,color='blue',alpha=0.7,s=100)
     plt.title('Ratio of Effective Ranks with Embedding Dimension %d'%(K))
     plt.xlabel('Sparse Feature Index')
-    plt.ylabel('Ratio of Effective Rank(1-layer/2-layer)')
+    plt.ylabel('Ratio of Effective Rank(2-layer/1-layer)')
     plt.xticks(Xs)
     plt.grid(linestyle='--')
     plt.savefig('plots/(%s %s)ratio_plot.pdf'%(64,K))
@@ -80,7 +80,7 @@ l1 = plt.scatter(Ks,avg_rank1,color='blue',marker='o',s=120,alpha=0.7)
 l1, = plt.plot(Ks,avg_rank1,color='blue')
 plt.title('Average Ratio of Effective Ranks')
 plt.xlabel('Dimension k')
-plt.ylabel('Average Ratio of Effective Rank(1-layer/2-layer)')
+plt.ylabel('Average Ratio of Effective Rank(2-layer/1-layer)')
 plt.xticks(Ks)
 plt.grid(linestyle='--')
 plt.savefig('plots/avg_ratio_plot.pdf')
