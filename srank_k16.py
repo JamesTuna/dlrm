@@ -14,7 +14,7 @@ def stable_rank(X):
         square = X.T.dot(X)
     else:
         square = X.dot(X.T)
-    sq_f_norm = np.sum(square)
+    sq_f_norm = np.trace(square)
     U,S,VT = np.linalg.svd(square)
     sq_2_norm = S[0]
     return sq_f_norm/sq_2_norm
